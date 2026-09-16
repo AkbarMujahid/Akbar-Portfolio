@@ -3,6 +3,10 @@ const theme = document.querySelector('.theme-toggle');
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 const cursor = document.querySelector('.cursor-dot');
+const resumeMenu = document.querySelector('.resume-menu');
+const resumeDialog = document.querySelector('.resume-dialog');
+const resumeViewer = document.querySelector('.resume-viewer');
+const resumeDialogTitle = document.querySelector('#resume-dialog-title');
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -20,9 +24,19 @@ menu.addEventListener('click', () => {
 });
 nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   nav.classList.remove('open');
+  resumeMenu.open = false;
   menu.setAttribute('aria-expanded', 'false');
   menu.textContent = 'Menu';
 }));
+
+document.querySelectorAll('[data-resume-src]').forEach(button => button.addEventListener('click', () => {
+  resumeViewer.src = button.dataset.resumeSrc;
+  resumeViewer.title = `${button.dataset.resumeTitle} preview`;
+  resumeDialogTitle.textContent = button.dataset.resumeTitle;
+  resumeMenu.open = false;
+  resumeDialog.showModal();
+}));
+resumeDialog.addEventListener('close', () => { resumeViewer.src = ''; });
 
 window.addEventListener('scroll', () => document.querySelector('.site-header').classList.toggle('scrolled', scrollY > 8), { passive: true });
 

@@ -1,0 +1,2 @@
+/* Keep the supporting-project metadata in the document flow so it never collides with links. */
+.supporting-work .text-link{display:inline-flex;align-items:center;margin-top:10px}.supporting-work article>b{position:static;display:block;margin-top:12px}.supporting-work article>b::before{content:'TECH — ';color:var(--acid)}
